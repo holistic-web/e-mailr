@@ -1,0 +1,13 @@
+{
+    "hosting": {
+        "public": "build",
+        "site": "e-mailr-dev",
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ]
+    }
+}
