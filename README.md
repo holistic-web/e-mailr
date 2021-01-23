@@ -1,6 +1,9 @@
 # e-mailr
 An app to send analogue messages, digitally!
 
+https://e-mailr.web.app
+https://e-mailr-dev.web.app
+
 It depends on:
 - firebase project "e-mailr"
 - some form of letter provider (TBD)
