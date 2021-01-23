@@ -25,7 +25,7 @@ jobs:
       - name: Build project
         run: |
           cd web-app
-          npm ci
+          yarn install
           npm run build
 
       - name: Set to live if branch is master

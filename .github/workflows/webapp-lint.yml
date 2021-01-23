@@ -21,7 +21,7 @@ jobs:
       - name: Install Node.js dependencies
         run: |
           cd web-app
-          npm ci
+          yarn install
 
       - name: Run linters
         uses: wearerequired/lint-action@v1
