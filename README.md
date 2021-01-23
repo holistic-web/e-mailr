@@ -1,3 +1,15 @@
 # e-mailr
-
 An app to send analogue messages, digitally!
+
+It depends on:
+- firebase project "e-mailr"
+- some form of letter provider (TBD)
+- some form of payment processor (TBD)
+
+It is made up of the following components:
+
+## web-app
+This project uses a react progressive web app for the front-end. It is still a work in progress.
+
+## cloud-function
+These will connect with 3rd party apis. It is not yet implemented.
