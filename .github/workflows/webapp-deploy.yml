@@ -32,7 +32,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           cd web-app
-          contents="$(jq '.hosting.site = "charge-hub"' firebase.json)" && \
+          contents="$(jq '.hosting.site = "e-mailr"' firebase.json)" && \
           echo "${contents}" > firebase.json
 
       - name: Deploy to Firebase
