@@ -1,1 +1,1 @@
-export { default } from './MultiParagraph'
+export { default } from './MultiParagraph';

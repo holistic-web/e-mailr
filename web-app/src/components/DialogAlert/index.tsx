@@ -1,1 +1,1 @@
-export { default } from './DialogAlert'
+export { default } from './DialogAlert';

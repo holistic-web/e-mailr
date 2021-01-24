@@ -1,4 +1,4 @@
-import Typography, { TypographyProps } from '@material-ui/core/Typography'
+import Typography, { TypographyProps } from '@material-ui/core/Typography';
 
 type Props = {
     text: string
@@ -21,7 +21,7 @@ const MultiParagraph = (props: Props) => {
                     )
             )}
         </>
-    )
-}
+    );
+};
 
-export default MultiParagraph
+export default MultiParagraph;

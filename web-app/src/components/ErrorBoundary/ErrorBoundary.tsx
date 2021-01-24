@@ -1,4 +1,4 @@
-import { Component, ReactNode, ErrorInfo } from 'react'
+import { Component, ReactNode, ErrorInfo } from 'react';
 
 type Props = {
     onError: (error: Error, info: ErrorInfo) => void
@@ -18,17 +18,17 @@ class ErrorBoundary extends Component<Props, State> {
     componentDidCatch(error: Error, info: ErrorInfo) {
         this.setState({
             hasError: true
-        })
+        });
 
-        this.props.onError(error, info)
+        this.props.onError(error, info);
     }
 
     render() {
-        const { errorComponent, children } = this.props
-        const { hasError } = this.state
+        const { errorComponent, children } = this.props;
+        const { hasError } = this.state;
 
-        return hasError ? errorComponent : children
+        return hasError ? errorComponent : children;
     }
 }
 
-export default ErrorBoundary
+export default ErrorBoundary;

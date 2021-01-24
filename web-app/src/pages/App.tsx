@@ -1,14 +1,14 @@
-import { useEffect } from 'react'
-import { Route, Switch, Redirect } from 'react-router'
-import Signin from './Signin'
-import Home from './Home'
-import routes from './routes'
-import { useSetRecoilState } from 'recoil'
-import { sessionState } from '../state'
-import firebase from '../firebase'
+import { useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router';
+import Signin from './Signin';
+import Home from './Home';
+import routes from './routes';
+import { useSetRecoilState } from 'recoil';
+import { sessionState } from '../state';
+import firebase from '../firebase';
 
 const App = () => {
-    const setSession = useSetRecoilState(sessionState)
+    const setSession = useSetRecoilState(sessionState);
 
     // Subscribe to firebase auth
     useEffect(
@@ -21,10 +21,10 @@ const App = () => {
                         email: resultUser.email,
                         displayName: resultUser.displayName
                     }
-                })
+                });
             }),
         [setSession]
-    )
+    );
 
     return (
         <Switch>
@@ -32,7 +32,7 @@ const App = () => {
             <Route path={routes.home} children={<Home />} />
             <Redirect to={routes.home} />
         </Switch>
-    )
-}
+    );
+};
 
-export default App
+export default App;

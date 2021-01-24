@@ -1,7 +1,7 @@
-import Database from './Database'
+import Database from './Database';
 
 type FirestoreCollectionPaths = {
     pets: Database.Pet
 }
 
-export default FirestoreCollectionPaths
+export default FirestoreCollectionPaths;

@@ -1,6 +1,6 @@
-import { useRef, ReactNode } from 'react'
-import { Menu, IconButton } from '@material-ui/core'
-import MoreVertIcon from '@material-ui/icons/MoreVert'
+import { useRef, ReactNode } from 'react';
+import { Menu, IconButton } from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 type Props = {
     children: ReactNode
@@ -10,7 +10,7 @@ type Props = {
 }
 
 const MoreOptionsMenu = (props: Props) => {
-    const menuAnchorEl = useRef(null)
+    const menuAnchorEl = useRef(null);
 
     return (
         <>
@@ -30,7 +30,7 @@ const MoreOptionsMenu = (props: Props) => {
                 {props.children}
             </Menu>
         </>
-    )
-}
+    );
+};
 
-export default MoreOptionsMenu
+export default MoreOptionsMenu;

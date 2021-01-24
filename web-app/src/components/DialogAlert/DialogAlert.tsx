@@ -6,7 +6,7 @@ import {
     DialogActions,
     DialogContent,
     DialogContentText
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 type Props = {
     text: string
@@ -27,7 +27,7 @@ const DialogAlert = (props: Props) => {
         onClose,
         children,
         ...dialogProps
-    } = props
+    } = props;
 
     return (
         <Dialog {...dialogProps} onClose={onClose}>
@@ -45,7 +45,7 @@ const DialogAlert = (props: Props) => {
                 </Button>
             </DialogActions>
         </Dialog>
-    )
-}
+    );
+};
 
-export default DialogAlert
+export default DialogAlert;

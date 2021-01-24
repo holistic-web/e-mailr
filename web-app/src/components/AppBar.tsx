@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode } from 'react';
 import {
     AppBar as MaterialAppBar,
     Box,
@@ -6,10 +6,10 @@ import {
     Typography,
     IconButton,
     useScrollTrigger
-} from '@material-ui/core'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import { Link } from 'react-router-dom'
-import NightsStayIcon from '@material-ui/icons/NightsStayOutlined'
+} from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { Link } from 'react-router-dom';
+import NightsStayIcon from '@material-ui/icons/NightsStayOutlined';
 
 type Props = {
     title?: string
@@ -21,7 +21,7 @@ const AppBar = (props: Props) => {
     const trigger = useScrollTrigger({
         disableHysteresis: true,
         threshold: 40
-    })
+    });
 
     return (
         <MaterialAppBar
@@ -49,7 +49,7 @@ const AppBar = (props: Props) => {
                 {props.actions}
             </Toolbar>
         </MaterialAppBar>
-    )
-}
+    );
+};
 
-export default AppBar
+export default AppBar;

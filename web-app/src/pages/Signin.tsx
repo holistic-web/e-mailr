@@ -1,13 +1,13 @@
-import { useEffect } from 'react'
-import firebase from '../firebase'
-import * as firebaseui from 'firebaseui'
-import 'firebaseui/dist/firebaseui.css'
-import { Box } from '@material-ui/core'
-import AppBar from '../components/AppBar'
-import routes from './routes'
-import Wrapper from '../components/Wrapper'
+import { useEffect } from 'react';
+import firebase from '../firebase';
+import * as firebaseui from 'firebaseui';
+import 'firebaseui/dist/firebaseui.css';
+import { Box } from '@material-ui/core';
+import AppBar from '../components/AppBar';
+import routes from './routes';
+import Wrapper from '../components/Wrapper';
 
-const ui = new firebaseui.auth.AuthUI(firebase.auth())
+const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 const Signin = () => {
     useEffect(() => {
@@ -18,8 +18,8 @@ const Signin = () => {
                 firebase.auth.EmailAuthProvider.PROVIDER_ID,
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID
             ]
-        })
-    }, [])
+        });
+    }, []);
 
     return (
         <>
@@ -32,7 +32,7 @@ const Signin = () => {
                 <Box id='firebaseui-auth-container' marginTop={4} />
             </Wrapper>
         </>
-    )
-}
+    );
+};
 
-export default Signin
+export default Signin;

@@ -1,4 +1,4 @@
-import firebase from 'firebase/app'
+import firebase from 'firebase/app';
 
 // firebase config can be found in your firebase project
 const firebaseConfig = {
@@ -9,8 +9,8 @@ const firebaseConfig = {
     messagingSenderId: '122365387389',
     appId: '1:122365387389:web:959b1dfc443fcde1c90714',
     measurementId: 'G-4MR4SWV5SB'
-}
+};
 
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(firebaseConfig);
 
-export default firebase
+export default firebase;

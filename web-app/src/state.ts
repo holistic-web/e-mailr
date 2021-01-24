@@ -2,7 +2,7 @@
  * Define the different parts of your state here
  * using https://recoiljs.org/
  */
-import { atom } from 'recoil'
+import { atom } from 'recoil';
 
 export const sessionState = atom<{
     user: {
@@ -17,4 +17,4 @@ export const sessionState = atom<{
         isAuthenticating: true,
         user: null
     }
-})
+});

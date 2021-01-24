@@ -1,5 +1,5 @@
-import firebase from '../firebase'
-import FirestoreResult from '../models/FirestoreResult'
+import firebase from '../firebase';
+import FirestoreResult from '../models/FirestoreResult';
 
 const subscribeToFirestoreCollection = <T>(
     firestoreQuery: firebase.firestore.Query<T>,
@@ -14,15 +14,15 @@ const subscribeToFirestoreCollection = <T>(
                     ...doc.data()
                 })),
                 error: undefined
-            })
+            });
         },
         error => {
-            console.error(error)
+            console.error(error);
             setResult({
                 loading: false,
                 error
-            })
+            });
         }
-    )
+    );
 
-export default subscribeToFirestoreCollection
+export default subscribeToFirestoreCollection;

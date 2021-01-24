@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import FirestoreCollectionPaths from '../../models/FirestoreCollectionPaths'
-import FirestoreResult from '../../models/FirestoreResult'
-import firestore from '../../firebase/firestore'
+import { useEffect, useState } from 'react';
+import FirestoreCollectionPaths from '../../models/FirestoreCollectionPaths';
+import FirestoreResult from '../../models/FirestoreResult';
+import firestore from '../../firebase/firestore';
 
 const useFirestoreDocument = <T extends keyof FirestoreCollectionPaths>(
     collectionPath: T,
@@ -11,7 +11,7 @@ const useFirestoreDocument = <T extends keyof FirestoreCollectionPaths>(
         FirestoreResult<FirestoreCollectionPaths[T]>
     >({
         loading: true
-    })
+    });
 
     useEffect(
         () =>
@@ -27,19 +27,19 @@ const useFirestoreDocument = <T extends keyof FirestoreCollectionPaths>(
                                 id: result.id
                             },
                             error: undefined
-                        })
+                        });
                     },
                     error => {
                         setResult({
                             loading: false,
                             error
-                        })
+                        });
                     }
                 ),
         [collectionPath, documentId]
-    )
+    );
 
-    return result
-}
+    return result;
+};
 
-export default useFirestoreDocument
+export default useFirestoreDocument;

@@ -1,15 +1,15 @@
-import { ChangeEvent, useState, useRef } from 'react'
-import Paper from '@material-ui/core/Paper'
-import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import IconButton from '@material-ui/core/IconButton'
-import SearchIcon from '@material-ui/icons/Search'
-import Input from '@material-ui/core/Input'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import Toolbar from '@material-ui/core/Toolbar'
-import ClearIcon from '@material-ui/icons/Clear'
-import Transition, { TransitionStatus } from 'react-transition-group/Transition'
+import { ChangeEvent, useState, useRef } from 'react';
+import Paper from '@material-ui/core/Paper';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Toolbar from '@material-ui/core/Toolbar';
+import ClearIcon from '@material-ui/icons/Clear';
+import Transition, { TransitionStatus } from 'react-transition-group/Transition';
 
-const transitionTimeout: number = 100
+const transitionTimeout: number = 100;
 const defaultStyle = {
     transition: `opacity ${transitionTimeout}ms linear`,
     opacity: 0,
@@ -19,7 +19,7 @@ const defaultStyle = {
     overflow: 'hidden',
     pointerEvents: 'none',
     zIndex: 1
-}
+};
 
 const transitionStyles: { [key in TransitionStatus]?: any } = {
     entering: {
@@ -29,7 +29,7 @@ const transitionStyles: { [key in TransitionStatus]?: any } = {
         opacity: 1,
         pointerEvents: 'auto'
     }
-}
+};
 
 type Props = {
     placeholder: string
@@ -37,36 +37,36 @@ type Props = {
 }
 
 const ExpandableSearch = (props: Props) => {
-    const [value, setValue] = useState<string>('')
-    const [searchModeOn, setSearchModeOn] = useState<boolean>(false)
+    const [value, setValue] = useState<string>('');
+    const [searchModeOn, setSearchModeOn] = useState<boolean>(false);
 
-    const searchInput = useRef<HTMLInputElement>(null)
+    const searchInput = useRef<HTMLInputElement>(null);
 
     const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const newValue: string = e.currentTarget.value
-        setValue(newValue)
-        props.onChangeValue(newValue)
-    }
+        const newValue: string = e.currentTarget.value;
+        setValue(newValue);
+        props.onChangeValue(newValue);
+    };
 
     const toggleSearchMode = () => {
-        const newSearchModeOn: boolean = !searchModeOn
-        setValue('')
-        setSearchModeOn(newSearchModeOn)
+        const newSearchModeOn: boolean = !searchModeOn;
+        setValue('');
+        setSearchModeOn(newSearchModeOn);
 
         if (newSearchModeOn && searchInput.current) {
-            searchInput.current.focus()
+            searchInput.current.focus();
         } else {
-            props.onChangeValue('')
+            props.onChangeValue('');
         }
-    }
+    };
 
     const handleClickClear = () => {
-        setValue('')
-        props.onChangeValue('')
+        setValue('');
+        props.onChangeValue('');
         if (searchInput.current) {
-            searchInput.current.focus()
+            searchInput.current.focus();
         }
-    }
+    };
 
     return (
         <>
@@ -113,7 +113,7 @@ const ExpandableSearch = (props: Props) => {
                 )}
             </Transition>
         </>
-    )
-}
+    );
+};
 
-export default ExpandableSearch
+export default ExpandableSearch;

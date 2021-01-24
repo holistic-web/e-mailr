@@ -4,4 +4,4 @@ type FirestoreResult<T> = {
     error?: Error
 }
 
-export default FirestoreResult
+export default FirestoreResult;

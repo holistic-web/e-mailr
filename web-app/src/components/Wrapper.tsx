@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
-import { Box, Container, ContainerProps } from '@material-ui/core'
+import { ReactNode } from 'react';
+import { Box, Container, ContainerProps } from '@material-ui/core';
 
 type Props = {
     children: ReactNode
@@ -19,7 +19,7 @@ const Wrapper = ({
                 {children}
             </Box>
         </Container>
-    )
-}
+    );
+};
 
-export default Wrapper
+export default Wrapper;

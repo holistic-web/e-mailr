@@ -5,4 +5,4 @@ namespace Database {
     }
 }
 
-export default Database
+export default Database;

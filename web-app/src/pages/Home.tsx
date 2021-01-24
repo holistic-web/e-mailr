@@ -1,15 +1,15 @@
-import { Box, Typography, TextField, Button } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import routes from './routes'
-import Wrapper from '../components/Wrapper'
-import AppBar from '../components/AppBar'
-import { useForm } from 'react-hook-form'
-import formErrorMessages from '../utils/formErrorMessages'
+import { Box, Typography, TextField, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import routes from './routes';
+import Wrapper from '../components/Wrapper';
+import AppBar from '../components/AppBar';
+import { useForm } from 'react-hook-form';
+import formErrorMessages from '../utils/formErrorMessages';
 
 const Home = () => {
     const { register, errors, handleSubmit, reset } = useForm<{
         name: string
-    }>()
+    }>();
 
     return (
         <>
@@ -44,8 +44,8 @@ const Home = () => {
                 </Box>
                 <form
                     onSubmit={handleSubmit(vals => {
-                        console.log(vals)
-                        reset()
+                        console.log(vals);
+                        reset();
                     })}
                 >
                     <TextField
@@ -65,7 +65,7 @@ const Home = () => {
                 </form>
             </Wrapper>
         </>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;
