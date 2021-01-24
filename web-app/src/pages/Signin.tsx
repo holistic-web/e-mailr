@@ -15,7 +15,6 @@ const Signin = () => {
             // Firebase UI config options
             signInSuccessUrl: '/',
             signInOptions: [
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID
             ]
         });
