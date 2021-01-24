@@ -37,6 +37,11 @@ As mentioned above, CI is configured for this project to run on merge to `develo
 
 The configuration for this can be found in the `./github/workflows/webapp-deploy.yml` file (from the root level of this project).
 
+## Left to do
+- get sign in flow working
+- get email form working
+- have some screen to show sent emails
+
 ## Unknowns
 Since this project is the first we've started from this template, there are a few areas where we aren't sure what's going on. It would be good to increase our understanding of what this logic does (and add to this list if we find anything surprising!):
 

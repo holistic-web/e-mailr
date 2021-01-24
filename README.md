@@ -12,7 +12,7 @@ It depends on:
 It is made up of the following components:
 
 ## web-app
-This project uses a react progressive web app for the front-end. It is still a work in progress.
+This project uses a react progressive web app for the front-end. It is still a work in progress but can be found in the `/web-app` folder.
 
-## cloud-function
+## cloud-functions
 These will connect with 3rd party apis. It is not yet implemented.
