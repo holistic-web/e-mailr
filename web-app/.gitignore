@@ -3,6 +3,9 @@
 # firebase
 .firebase
 
+# eslint
+.eslintcache
+
 # dependencies
 /node_modules
 /.pnp

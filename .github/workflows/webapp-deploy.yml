@@ -26,7 +26,7 @@ jobs:
         run: |
           cd web-app
           yarn install
-          npm run build
+          yarn build
 
       - name: Set to live if branch is master
         if: github.ref == 'refs/heads/master'

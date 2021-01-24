@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Bootstrap a full stack application with pre-configured: hosting, database, authentication, CI, CD, component library, state management, form utils.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This template tries to make as many opinionated choices as possible about the dev stack in order to quickly build a product that could sustain a significant amount of traffic/users.
 
-## Available Scripts
+For this template to work all you will need is a Firebase project. I recommend using their free tier to start off.
 
-In the project directory, you can run:
+## Tech Stack Choices:
+- **[create-react-app](https://github.com/facebook/create-react-app)** as the project's starting point, using the *cra-template-pwa-typescript* template, this includes:
+  - **React**
+  - **Typescript**
+  - cra's bundling capabilities
+  - **Jest** for testing
+  - **PWA** pre-configured
+- **[Firebase](https://firebase.google.com/)** for Hosting, Database (Firestore) with offline mode enabled, and Authentication
+- **Github Actions** to automate tests and deploys
+- **[material-ui](https://github.com/mui-org/material-ui)** component library
+- **[recoil](https://github.com/facebookexperimental/Recoil)** for state management
+- **[react-hook-form](https://github.com/react-hook-form/react-hook-form)** for building forms quickly
+- **[react-testing-library](https://testing-library.com/docs/react-testing-library/intro)** for writing tests
 
-### `yarn start`
+## Getting Started
+After starting your repo with this template you need to configure your Firebase project:
+- Make sure you have enabled all the **Firebase** services you wish to use in your project
+- Copy your firebase config located at *Firebase Project > Project Settings > Firebase SDK snippet > Config*
+- Paste the firebase config to `src/firebase/firebase.ts` for the respective environment
+- Set your *Firebase Project* as *default* at `.firebaserc`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Automate Deploys to Firebase hosting
+CI tests are configured out of the box, but to enable deploys to Firebase do the following:
+- Create a Firebase Auth Token locally: `yarn firebase login:ci`
+- Add the Firebase token to Github as a *secret* called `FIREBASE_TOKEN`. You can add secrets at *Github Project > Settings > Secrets*.
+- Open the file `.github/workflows/ci.yml` and uncomment the lines `46-51` 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Every time a commit is pushed to github, Github will automatically run the CI tests; and every time there is a push to master, Github will deploy the new version to Firebase. See the ci workflow in `.github/workflows/ci.yml` for more details.
 
-### `yarn test`
+## Development
+In two separate terminal windows run the commands: `yarn start:server` and `yarn start`. The Firebase server is run as an emulator locally, which means that it won't use any quota of your Firebase project.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The Firebase object has been extended with Typescript to enforce a database schema whenever you use *firebase* to access your Database. The schema you define can be hooked up in `src/models/FirestoreCollectionPaths.ts`.
 
-### `yarn build`
+## Testing
+I recommend following the **react-testing-library** advice of writing tests that closely resemble the way your app is used. This means writing more integration tests where you render the whole app and test actual user functionalities.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can find some functions to help with rendering the app and mocking Firestore collections in the `/test-utils` folder. Here is an example of a test:
+```
+import renderApp from '../test-utils/renderApp'
+import { mockCollection } from '../test-utils/firebaseMocks'
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+test('display all pets', () => {
+  mockCollection('pets', { id: 'test', name: 'Abc' })
+  const view = renderApp()
+  expect(view.getByText('Abc')).toBeInTheDocument()
+})
+```
