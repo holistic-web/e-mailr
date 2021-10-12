@@ -15,16 +15,19 @@ This project depends on:
 
 ## Project
 The project is made up of the following components:
-| **Component** | **Function**                                    |
-|---------------|-------------------------------------------------|
-| `/firestore`  | Configures firestore database rules and indexes |
-| `/web-app`    | React user facing UI                            |
+| **Component**      | **Function**                                    |
+|--------------------|-------------------------------------------------|
+| `/cloud-functions` | Firebase cloud functions and event triggers     |
+| `/firestore`       | Configures firestore database rules and indexes |
+| `/web-app`         | Nuxt user facing UI                             |
 
 ## Continuous Integration
 Our CI is defined in the `.github/workflows` directory.
 
-### Firestore
-Firestore rules and indexes are updated when a change is merged into the master branch.
-
-### Web App
-The web app deploys to devlopment URL when changes are made to the development branch, and to live when changes are made to the master branch.
+| **Job**                  | **Purpose**                                                | **Branch(es)**               |
+|--------------------------|------------------------------------------------------------|------------------------------|
+| `cloud-functions_deploy` | Deploys the cloud functions to the relevant environment    | `master`                     |
+| `cloud-functions_lint`   | Lints the cloud functions and checks it builds succesfully | _everything except `master`_ |
+| `firestore_deploy`       | Updates firestore rules and indexes                        | `master`                     |
+| `webapp_deploy`          | Deploys the web-app to the relevant environment            | `development` / `master`     |
+| `webapp_lint`            | Lints the web-app and checks it builds succesfully         | _everything except `master`_ |

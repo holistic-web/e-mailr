@@ -1,48 +1,68 @@
 # Web App
-This is the PWA for the e-mailr project, written in react. It is based on https://github.com/eddedd88/react-firebase-template.
 
-Dev: http://e-mailr-dev.web.app/
-Live: http://e-mailr.web.app/
+## Build Setup
 
-## Developing
-To start developing this project, first open a shell in this folder, then:
+```bash
+# install dependencies
+$ npm install
 
-Install dependencies using yarn
-```
-yarn install
-```
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-Run the web-app
-```
-yarn start
-```
+# build for production and launch server
+$ npm run build
+$ npm run start
 
-## Deploying
-Typically deployment to dev and live environments are managed through merge to the `development` or `master` branches, however if for some reason we need to deploy manually run the following from this folder:
-
-Build the project
-```
-yarn build
+# generate static project
+$ npm run generate
 ```
 
-Deploy the project
-```
-firebase deploy
-```
+For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-If you need to deploy to live directly rather than development, be sure to update the `site` value in `./firebase.json` to: `e-mailr`.
+## Special Directories
 
-## CI
-As mentioned above, CI is configured for this project to run on merge to `development` or `master` branches to deploy to dev or live respectively.
+You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
 
-The configuration for this can be found in the `./github/workflows/webapp-deploy.yml` file (from the root level of this project).
+### `assets`
 
-## Left to do
-- get sign in flow working
-- get email form working
-- have some screen to show sent emails
+The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
 
-## Unknowns
-Since this project is the first we've started from this template, there are a few areas where we aren't sure what's going on. It would be good to increase our understanding of what this logic does (and add to this list if we find anything surprising!):
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
 
-- There are some files relating to a service worker, this sounds good to have in the long run but what is it doing currently?
+### `components`
+
+The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+
+### `layouts`
+
+Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+
+### `pages`
+
+This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
+
+### `plugins`
+
+The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+
+### `static`
+
+This directory contains your static files. Each file inside this directory is mapped to `/`.
+
+Example: `/static/robots.txt` is mapped as `/robots.txt`.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
+
+### `store`
+
+This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
+
+More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
