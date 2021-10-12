@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build",
+    "public": "web-app/build",
     "site": "e-mailr-dev",
     "ignore": [
       "firebase.json",
@@ -9,7 +9,7 @@
     ],
     "headers": [
       {
-        "source": "/service-worker.js",
+        "source": "/web-app/build/service-worker.js",
         "headers": [
           {
             "key": "Cache-Control",
@@ -26,11 +26,8 @@
     ]
   },
   "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
-  "storage": {
-    "rules": "storage.rules"
+    "rules": "firestore/firestore.rules",
+    "indexes": "firestore/firestore.indexes.json"
   },
   "emulators": {
     "firestore": {
