@@ -1,0 +1,44 @@
+name: webapp_deploy
+
+on:
+  push:
+    branches:
+      - master
+      - development
+    paths:
+      - "web-app/**"
+
+jobs:
+  webapp-deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Build project
+        run: |
+          cd web-app
+          npm ci
+          npm run generate
+
+      - name: Set to live if branch is master
+        if: github.ref == 'refs/heads/master'
+        run: |
+          contents="$(jq '.hosting.site = "e-mailr"' firebase.json)" && \
+          echo "${contents}" > firebase.json
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

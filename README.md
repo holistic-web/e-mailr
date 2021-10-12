@@ -1,18 +1,33 @@
 # e-mailr
 An app to send analogue messages, digitally!
 
-https://e-mailr.web.app
-https://e-mailr-dev.web.app
+| **Environment** | **URL**                     |
+|-----------------|-----------------------------|
+| live            | https://e-mailr.web.app     |
+| dev             | https://e-mailr-dev.web.app |
 
-It depends on:
-- firebase project "e-mailr"
-- some form of letter provider (TBD)
-- some form of payment processor (TBD)
 
-It is made up of the following components:
+## Infrastructure
+This project depends on:
+| **Technology** | **Description**                                 | **Project Name** |
+|----------------|-------------------------------------------------|------------------|
+| firebase       | Manages hosting and cloud functions deployments | `e-mailr`        |
 
-## web-app
-This project uses a react progressive web app for the front-end. It is still a work in progress.
+## Project
+The project is made up of the following components:
+| **Component**      | **Function**                                    |
+|--------------------|-------------------------------------------------|
+| `/cloud-functions` | Firebase cloud functions and event triggers     |
+| `/firestore`       | Configures firestore database rules and indexes |
+| `/web-app`         | Nuxt user facing UI                             |
 
-## cloud-function
-These will connect with 3rd party apis. It is not yet implemented.
+## Continuous Integration
+Our CI is defined in the `.github/workflows` directory.
+
+| **Job**                  | **Purpose**                                                | **Branch(es)**               |
+|--------------------------|------------------------------------------------------------|------------------------------|
+| `cloud-functions_deploy` | Deploys the cloud functions to the relevant environment    | `master`                     |
+| `cloud-functions_lint`   | Lints the cloud functions and checks it builds succesfully | _everything except `master`_ |
+| `firestore_deploy`       | Updates firestore rules and indexes                        | `master`                     |
+| `webapp_deploy`          | Deploys the web-app to the relevant environment            | `development` / `master`     |
+| `webapp_lint`            | Lints the web-app and checks it builds succesfully         | _everything except `master`_ |

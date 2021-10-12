@@ -1,0 +1,32 @@
+# firebase
+.firebase
+firebase-debug.log
+
+# eslint
+.eslintcache
+
+# dependencies
+**/node_modules/**
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+**/build**
+# Compiled JavaScript files
+**/dist/**/*.js
+**/dist/**/*.js.map
+
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
