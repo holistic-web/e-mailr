@@ -1,4 +1,5 @@
 # Web App
+This is a Nuxt web app, deployed as a static site. Below is the standard Nuxt.js Readme file.
 
 ## Build Setup
 

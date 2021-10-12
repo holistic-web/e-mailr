@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "web-app/build",
+    "public": "web-app/dist",
     "site": "e-mailr-dev",
     "ignore": [
       "firebase.json",
