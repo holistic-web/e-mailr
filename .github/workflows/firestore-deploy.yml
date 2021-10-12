@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - development
 
 jobs:
   webapp-deploy:
@@ -22,22 +21,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Build project
-        run: |
-          cd web-app
-          yarn install
-          yarn build
-
-      - name: Set to live if branch is master
-        if: github.ref == 'refs/heads/master'
-        run: |
-          cd web-app
-          contents="$(jq '.hosting.site = "e-mailr"' firebase.json)" && \
-          echo "${contents}" > firebase.json
-
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: deploy --only firestore
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: "web-app"
