@@ -14,7 +14,7 @@ const Home = () => {
     return (
         <>
             <AppBar
-                title='fullstrapp'
+                title='e-mailr'
                 actions={
                     <Button
                         color='primary'

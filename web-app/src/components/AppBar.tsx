@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Link } from 'react-router-dom';
-import NightsStayIcon from '@material-ui/icons/NightsStayOutlined';
+import MailOutlinedIcon from '@material-ui/icons/MailOutlined';
 
 type Props = {
     title?: string
@@ -41,7 +41,7 @@ const AppBar = (props: Props) => {
                     </IconButton>
                 )}
                 {!props.backTo && (
-                    <NightsStayIcon color='primary' fontSize='large' />
+                    <MailOutlinedIcon color='primary' fontSize='large' />
                 )}
                 <Box ml={3} flex='auto'>
                     <Typography variant='h6'>{props.title}</Typography>
