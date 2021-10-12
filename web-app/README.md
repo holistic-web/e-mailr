@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Web App
+This is the PWA for the e-mailr project, written in react. It is based on https://github.com/eddedd88/react-firebase-template.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dev: http://e-mailr-dev.web.app/
+Live: http://e-mailr.web.app/
 
-## Available Scripts
+## Developing
+To start developing this project, first open a shell in this folder, then:
 
-In the project directory, you can run:
+Install dependencies using yarn
+```
+yarn install
+```
 
-### `yarn start`
+Run the web-app
+```
+yarn start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Deploying
+Typically deployment to dev and live environments are managed through merge to the `development` or `master` branches, however if for some reason we need to deploy manually run the following from this folder:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Build the project
+```
+yarn build
+```
 
-### `yarn test`
+Deploy the project
+```
+firebase deploy
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If you need to deploy to live directly rather than development, be sure to update the `site` value in `./firebase.json` to: `e-mailr`.
 
-### `yarn build`
+## CI
+As mentioned above, CI is configured for this project to run on merge to `development` or `master` branches to deploy to dev or live respectively.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The configuration for this can be found in the `./github/workflows/webapp-deploy.yml` file (from the root level of this project).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Left to do
+- get sign in flow working
+- get email form working
+- have some screen to show sent emails
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Unknowns
+Since this project is the first we've started from this template, there are a few areas where we aren't sure what's going on. It would be good to increase our understanding of what this logic does (and add to this list if we find anything surprising!):
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- There are some files relating to a service worker, this sounds good to have in the long run but what is it doing currently?
