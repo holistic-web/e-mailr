@@ -23,9 +23,9 @@ https://firebase.google.com/docs/functions/local-emulator#web-v8
    firebase emulators:start --only functions
    ```
 
-The http functions will then be available at `localhost:5001/ritoplz/us-central1/{function name}`, eg:
+The http functions will then be available at `localhost:5001/e-mailr/us-central1/{function name}`, eg:
 
 ```
-localhost:5001/ritoplz/us-central1/ritoApi
+localhost:5001/e-mailr/us-central1
 ```
 

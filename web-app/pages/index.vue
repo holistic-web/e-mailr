@@ -1,6 +1,6 @@
 <template>
   <section class="Home">
-    <h1>rito-plz</h1>
+    <h1>e-mailr</h1>
   </section>
 </template>
 

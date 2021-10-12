@@ -1,5 +1,6 @@
 # firebase
 .firebase
+firebase-debug.log
 
 # eslint
 .eslintcache
@@ -14,6 +15,10 @@
 
 # production
 **/build**
+# Compiled JavaScript files
+**/dist/**/*.js
+**/dist/**/*.js.map
+
 
 # misc
 .DS_Store
