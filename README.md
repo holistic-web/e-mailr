@@ -1,18 +1,30 @@
 # e-mailr
 An app to send analogue messages, digitally!
 
-https://e-mailr.web.app
-https://e-mailr-dev.web.app
+| **Environment** | **URL**                     |
+|-----------------|-----------------------------|
+| live            | https://e-mailr.web.app     |
+| dev             | https://e-mailr-dev.web.app |
 
-It depends on:
-- firebase project "e-mailr"
-- some form of letter provider (TBD)
-- some form of payment processor (TBD)
 
-It is made up of the following components:
+## Infrastructure
+This project depends on:
+| **Technology** | **Description**                                 | **Project Name** |
+|----------------|-------------------------------------------------|------------------|
+| firebase       | Manages hosting and cloud functions deployments | `e-mailr`        |
 
-## web-app
-This project uses a react progressive web app for the front-end. It is still a work in progress but can be found in the `/web-app` folder.
+## Project
+The project is made up of the following components:
+| **Component** | **Function**                                    |
+|---------------|-------------------------------------------------|
+| `/firestore`  | Configures firestore database rules and indexes |
+| `/web-app`    | React user facing UI                            |
 
-## cloud-functions
-These will connect with 3rd party apis. It is not yet implemented.
+## Continuous Integration
+Our CI is defined in the `.github/workflows` directory.
+
+### Firestore
+Firestore rules and indexes are updated when a change is merged into the master branch.
+
+### Web App
+The web app deploys to devlopment URL when changes are made to the development branch, and to live when changes are made to the master branch.
