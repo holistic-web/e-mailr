@@ -1,4 +1,4 @@
-# Stannp
+# Stripe
 Stripe is a payment processing company that we can use to process payments required for e-mailr through their API. Key documentation can be found at the links below.
 
 | **Information** | **URL**                                     |
