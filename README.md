@@ -35,4 +35,4 @@ Our CI is defined in the `.github/workflows` directory.
 The project is made up of the following components:
 | **Name** | **Description**                            |
 |----------|--------------------------------------------|
-| `Stannp` | Print on demand API, see `/docs/Stannp.md` |
+| Stannp   | Print on demand API, see `/docs/Stannp.md` |
