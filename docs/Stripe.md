@@ -9,7 +9,7 @@ Stripe is a payment processing company that we can use to process payments requi
 | Prebuilt example experience | https://checkout.stripe.dev/ |
 | Pricing         | https://stripe.com/gb/pricing |
 
-Configuration
+## Configuration
 Our account is set up under the company name "Holistics" and has the following users set up:
 
 andrew12lewis@gmail.com
