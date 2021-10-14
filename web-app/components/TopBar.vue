@@ -11,7 +11,6 @@
         text="Account"
         right
       >
-        <b-dropdown-item to="/profile"> Profile </b-dropdown-item>
         <b-dropdown-item @click="onSignOutClick">Sign Out</b-dropdown-item>
       </b-nav-item-dropdown>
     </b-nav>
