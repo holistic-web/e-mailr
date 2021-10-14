@@ -6,7 +6,6 @@ An app to send analogue messages, digitally!
 | live            | https://e-mailr.web.app     |
 | dev             | https://e-mailr-dev.web.app |
 
-
 ## Infrastructure
 This project depends on:
 | **Technology** | **Description**                                 | **Project Name** |
@@ -31,3 +30,9 @@ Our CI is defined in the `.github/workflows` directory.
 | `firestore_deploy`       | Updates firestore rules and indexes                        | `master`                     |
 | `webapp_deploy`          | Deploys the web-app to the relevant environment            | `development` / `master`     |
 | `webapp_lint`            | Lints the web-app and checks it builds succesfully         | _everything except `master`_ |
+
+## External Dependencies
+The project is made up of the following components:
+| **Name** | **Description**                            |
+|----------|--------------------------------------------|
+| `Stannp` | Print on demand API, see `/docs/Stannp.md` |
