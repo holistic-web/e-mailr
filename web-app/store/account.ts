@@ -28,13 +28,16 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async onAuthStateChanged({ commit, dispatch }, { authUser }) {
+  async onAuthStateChanged({ commit, dispatch }, { authUser, isRetry }) {
     if (authUser) {
       const idToken = await authUser.getIdToken()
-      // logging the id token is useful for testing locally
-      console.log('idToken: ', idToken) // eslint-disable-line no-console
       commit('SET_ID_TOKEN', idToken)
-      await dispatch('fetchUser', { id: authUser.uid })
+      try {
+        await dispatch('fetchUser', { id: authUser.uid })
+      } catch (err) {
+        // Handle the race condition where user's profile is in the process of being preovisioned
+        if (!isRetry) setTimeout(() => dispatch('onAuthStateChanged', { authUser, isRetry: true }), 1500);
+      }
       this.$router.push('/')
     } else {
       commit('SET_USER', undefined)
@@ -59,8 +62,6 @@ export const actions: ActionTree<RootState, RootState> = {
       if (!userRecord) throw new Error('User record does not exist')
       const user = {
         email: userRecord.email,
-        summonerId: userRecord.summonerId,
-        region: userRecord.region,
         uid: userRecord.uid,
       }
       commit('SET_USER', { ...user, uid: id })
@@ -79,7 +80,7 @@ export const actions: ActionTree<RootState, RootState> = {
           Authorization: `Bearer ${idToken}`,
         },
       })
-    } catch (err) {
+    } catch (err: any) {
       if (err.message === 'Request failed with status code 403')
         return dispatch('admin/invalidateApiKey', null, { root: true })
       alert(err)
