@@ -32,7 +32,7 @@
           </b-card-text>
 
           <!--TODO implement the mailing history page -->
-          <b-button href="#" variant="dark" class>Go somewhere</b-button>
+          <b-button href="#" variant="dark" class>View History</b-button>
         </b-card>
       </section>
     </b-container>
