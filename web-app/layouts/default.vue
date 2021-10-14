@@ -1,6 +1,5 @@
 <template>
   <div class="DefaultLayout">
-    <api-key-input v-if="!isApiKeyValid" />
     <top-bar />
     <Nuxt />
   </div>
