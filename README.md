@@ -6,12 +6,6 @@ An app to send analogue messages, digitally!
 | live            | https://e-mailr.web.app     |
 | dev             | https://e-mailr-dev.web.app |
 
-## Infrastructure
-This project depends on:
-| **Technology** | **Description**                                 | **Project Name** |
-|----------------|-------------------------------------------------|------------------|
-| firebase       | Manages hosting and cloud functions deployments | `e-mailr`        |
-
 ## Project
 The project is made up of the following components:
 | **Component**      | **Function**                                    |
@@ -20,8 +14,10 @@ The project is made up of the following components:
 | `/firestore`       | Configures firestore database rules and indexes |
 | `/web-app`         | Nuxt user facing UI                             |
 
+Infrastructure is managed through Firebase, under the project name "e-mailr".
+
 ## Continuous Integration
-Our CI is defined in the `.github/workflows` directory.
+Our CI is defined in the `.github/workflows` directory. Changes to the master branch are deployed directly to live.
 
 | **Job**                  | **Purpose**                                                | **Branch(es)**               |
 |--------------------------|------------------------------------------------------------|------------------------------|
