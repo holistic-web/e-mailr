@@ -4,20 +4,19 @@
       <h1 class="Home__title">Welcome</h1>
 
       <section class="Home__menu">
-
         <b-card
           title="Send a letter"
           img-src="~/assets/letters.jpg"
           img-alt="letters"
           img-top
           img-height="350px"
-          class="Home__menuItem">
+          class="Home__menuItem"
+        >
           <b-card-text>
             Send a letter to one or many recipients. Get your message out there!
           </b-card-text>
 
-          <!--TODO implement the send letter page -->
-          <b-button href="#" variant="dark">Start Mailing</b-button>
+          <b-button href="/write" variant="dark">Start Mailing</b-button>
         </b-card>
 
         <b-card
@@ -26,7 +25,8 @@
           img-alt="archive"
           img-top
           img-height="350px"
-          class="Home__menuItem">
+          class="Home__menuItem"
+        >
           <b-card-text>
             View your mailing history.
           </b-card-text>
@@ -52,6 +52,10 @@ export default Vue.extend({})
   justify-content: center;
   align-items: center;
   margin: 2rem 0;
+
+  &__content {
+    display: flex;
+  }
 
   &__title {
     margin-bottom: 1rem;
