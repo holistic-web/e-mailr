@@ -1,0 +1,21 @@
+.emailr-page {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.emailr-content {
+  display: flex;
+  flex-direction: column;
+
+  &-item {
+    margin: 1rem 0;
+  }
+}
+
+.emailr-title,
+.emailr-subttitle {
+  margin-bottom: 1rem;
+}
