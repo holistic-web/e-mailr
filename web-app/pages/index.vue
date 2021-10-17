@@ -46,6 +46,8 @@ export default Vue.extend({})
 </script>
 
 <style lang="scss">
+@import '../styles/classes';
+
 .Home {
 
   &__menu {
