@@ -1,7 +1,7 @@
 <template>
-  <section class="Home">
-    <b-container class="Home__content">
-      <h1 class="Home__title">Welcome</h1>
+  <section class="emailr-page">
+    <b-container class="emailr-content">
+      <h1 class="emailr-title">Welcome</h1>
 
       <section class="Home__menu">
         <b-card
@@ -47,19 +47,6 @@ export default Vue.extend({})
 
 <style lang="scss">
 .Home {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0;
-
-  &__content {
-    display: flex;
-  }
-
-  &__title {
-    margin-bottom: 1rem;
-  }
 
   &__menu {
     display: flex;
