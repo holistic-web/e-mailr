@@ -1,5 +1,5 @@
 <template>
-  <section class="Login">
+  <section class="emailr-page">
     <b-btn
       size="lg"
       :disabled="isSubmitting"
@@ -31,11 +31,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.Login {
-  display: flex;
-  width: 100%;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-}
+@import '../styles/classes';
+
 </style>
