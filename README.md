@@ -32,3 +32,4 @@ The project is made up of the following components:
 | **Name** | **Description**                            |
 |----------|--------------------------------------------|
 | Stannp   | Print on demand API, see `/docs/Stannp.md` |
+| Stripe   | Payment processor, see `docs/Stripe.md`
