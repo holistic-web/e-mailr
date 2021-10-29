@@ -56,6 +56,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import axios from 'axios'
 
 export default Vue.extend({
   data: () => ({
@@ -95,10 +96,23 @@ export default Vue.extend({
       // check the address is valid against Stannp
       // perhaps can do this (debounced) on input change and remove this button
     },
-    onSendButtonClick() {
-      // TODO: implement this
+    async onSendButtonClick() {
       // take the user to the payment flow
       // perhaps make a record of the mail in our database at this point
+      try {
+        // prod & firebase docs method of calling
+        // const payNow = firebase.functions().httpsCallable('payNow')
+        // await payNow(this.letterContent)
+        // emulator w/axios
+        const res = await axios.post(
+          'http://localhost:5001/e-mailr/us-central1/stripeApi/pay/checkout',
+          this.letterContent
+        )
+        console.log('res: ', res);
+        window.location.href = res.data.url
+      } catch (err) {
+        console.error(err) // eslint-disable-line no-console
+      }
     }
   },
 });
