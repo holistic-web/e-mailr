@@ -40,6 +40,7 @@ const sendNewDocument = async (data: any, context: any) => {
     // TODO: how do we verify we were actually sent to this page by stripe?
     success_url: "http://localhost:3000/success",
     cancel_url: "http://localhost:3000/cancel",
+    // TODO: tidy up the success / cancel pages that already exist if we don't use them
   });
 
   // Attach the stripe session id to the document in our database
