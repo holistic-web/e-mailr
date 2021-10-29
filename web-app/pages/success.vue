@@ -17,7 +17,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
   methods: {
-    async onSendButtonClick() {
+    onSendButtonClick() {
       try {
         window.location.href = 'http://localhost:3000'
       } catch (err) {
