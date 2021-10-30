@@ -1,7 +1,5 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex';
 import firebase from 'firebase';
-import axios from 'axios';
-import config from '../config';
 import { User } from '../../firestore/types';
 
 interface AccountState {
