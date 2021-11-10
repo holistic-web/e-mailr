@@ -1,11 +1,13 @@
 import * as functions from "firebase-functions";
 import { Document, DocumentStatus } from "../../../firestore/types";
-import config from "../config";
+// import config from "../config";
 const admin = require("firebase-admin");
 // TODO: set up dev and live values for stripe secret key
-const stripe = require("stripe")(config.stripe_secret_key);
+const stripe = require("stripe")("sk_test_51H5aXrBOHct1ZvxbphXmm0zC9G4IPcs3oYUCUhfxn7IsbzKHJMjAGWuPUHBjtiXMzoNO6eIwbTwOzIGo52H6AiNo00Z9g2nftu");
 
 const sendNewDocument = async (data: any, context: any) => {
+  console.log('context: ', context);
+  console.log('data: ', data);
   if (!context.auth)
     throw new Error("you must be authenticated to call this function");
 
@@ -28,7 +30,10 @@ const sendNewDocument = async (data: any, context: any) => {
       {
         price_data: {
           product_data: {
-            documentId: id,
+            name: "Mail",
+            metadata: {
+              documnameentId: id
+            }
           },
           currency: "gbp",
           unit_amount: 200,
@@ -42,13 +47,13 @@ const sendNewDocument = async (data: any, context: any) => {
     cancel_url: "http://localhost:3000/cancel",
     // TODO: tidy up the success / cancel pages that already exist if we don't use them
   });
-
+  console.log('session: ', session);
   // Attach the stripe session id to the document in our database
   await documentsCollection.doc(id).update({
     stripeSessionId: session.id,
   });
 
-  return session.url;
+  return {url: session.url};
 };
 
 export default functions.https.onCall(sendNewDocument);

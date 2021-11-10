@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios'
+import firebase from 'firebase'
 
 export default Vue.extend({
   data: () => ({
@@ -101,12 +101,13 @@ export default Vue.extend({
       // perhaps make a record of the mail in our database at this point
       try {
         // prod & firebase docs method of calling
-        // const payNow = firebase.functions().httpsCallable('payNow')
-        // await payNow(this.letterContent)
-        // emulator w/axios
-        const res = await axios.post(
-          'http://localhost:5001/e-mailr/us-central1/stripeApi/pay/checkout',
-          this.letterContent
+        firebase.functions().useEmulator('localhost', 5001)
+        const sendNewDocument = firebase.functions().httpsCallable('default-sendNewDocument')
+        const res = await sendNewDocument(
+          {
+            textContent: this.letterContent,
+            recipient: this.recipient
+          }
         )
         console.log('res: ', res);
         window.location.href = res.data.url

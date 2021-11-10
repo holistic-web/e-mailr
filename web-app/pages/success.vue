@@ -14,8 +14,23 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import firebase from 'firebase'
 
 export default Vue.extend({
+  mounted: function () {
+    this.$nextTick(async function () {
+      // Code that will run only after the
+      // entire view has been rendered
+      firebase.functions().useEmulator('localhost', 5001)
+        const verifyPaymentAndSend = firebase.functions().httpsCallable('default-verifyPaymentAndSend')
+        const res = await verifyPaymentAndSend(
+          {
+            sessionId: this.letterContent
+          }
+        )
+        console.log('res: ', res);
+    })
+  },
   methods: {
     onSendButtonClick() {
       try {
