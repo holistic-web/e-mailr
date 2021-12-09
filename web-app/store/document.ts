@@ -50,6 +50,11 @@ export const actions: ActionTree<RootState, RootState> = {
   sendNewDocument(_vuex , document: Document): Promise<any> {
     const sendNewDocument = this.$fire.functions.httpsCallable('default-sendNewDocument');
     return sendNewDocument(document);
+  },
+
+  verifyPaymentAndSend(_vuex, documentId): Promise<any> {
+    const verifyPaymentAndSend = this.$fire.functions.httpsCallable('default-verifyPaymentAndSend');
+    return verifyPaymentAndSend(documentId);
   }
 
 };

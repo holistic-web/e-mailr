@@ -1,42 +1,80 @@
 <template>
   <section class="emailr-page">
-    <b-container class="emailr-content">
-      <h1 class="emailr__title">Letter Sent</h1>
+    <b-container v-if="!isLoading" class="emailr-content">
+      <h1 class="emailr__title">Letter ~ Status: <b>{{ document.status }}</b></h1>
 
-      <b-button
-        @click="onSendButtonClick"
-      >
-        Home
-      </b-button>
+      <section class="emailr-content-item">
+        <b-row
+          v-for="(field, i) in recipientFields"
+          :key="i"
+          class="emailr-content-item"
+        >
+          <b-col sm="3">
+            <label
+              class="write__recipientLabel"
+              :for="`write__recipientField-${field}`"
+              v-text="field"
+            />
+          </b-col>
+          <b-col sm="9">
+            <b-form-input
+              :id="`write__recipientField-${field}`"
+              v-model="document.recipient[field]"
+              size="sm"
+              :required="true"
+              disabled
+            />
+          </b-col>
+        </b-row>
+      </section>
+
+      <section class="emailr-content-item">
+        <h2 class="emailr-subtitle">Letter Content</h2>
+        <b-form-textarea
+          v-model="document.textContent"
+          class="emailr-content-item"
+          rows="8"
+          disabled
+        />
+      </section>
     </b-container>
   </section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import firebase from 'firebase'
+import { mapGetters, mapActions } from 'vuex';
+import { DocumentStatus } from '../../../firestore/types';
+import stannpRecipient from '../../lib/stannpRecipient';
+
 
 export default Vue.extend({
-  mounted () {
-    this.$nextTick(async function () {
-      // Code that will run only after the
-      // entire view has been rendered
-      firebase.functions().useEmulator('localhost', 5001)
-        const verifyPaymentAndSend = firebase.functions().httpsCallable('default-verifyPaymentAndSend')
-        const res = await verifyPaymentAndSend(
-          // { sessionId: this.letterContent } ?!!
-        )
-        console.log('res: ', res);
-    })
+  data: () => ({
+    isLoading: false,
+    recipient: stannpRecipient,
+  }),
+  computed: {
+    ...mapGetters({
+      document: 'document/document',
+    }),
+    recipientFields(): Array<string> {
+      return Object.keys(this.recipient);
+    },
+  },
+  async created() {
+    this.isLoading = true;
+    await this.fetchDocument({ id: this.$route.params.id });
+    if (this.document.status === DocumentStatus.DRAFT) {
+      await this.verifyPaymentAndSend(this.document);
+      await this.fetchDocument({ id: this.$route.params.id });
+    }
+    this.isLoading = false;
   },
   methods: {
-    onSendButtonClick() {
-      try {
-        window.location.href = 'http://localhost:3000'
-      } catch (err) {
-        console.error(err) // eslint-disable-line no-console
-      }
-    }
+    ...mapActions({
+      fetchDocument: 'document/fetchDocument',
+      verifyPaymentAndSend: 'document/verifyPaymentAndSend',
+    }),
   },
 });
 </script>
