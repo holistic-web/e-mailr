@@ -21,6 +21,7 @@ export enum DocumentStatus {
 }
 
 export interface Document {
+  _id: string;
   userId: string;
   textContent: string;
   recipient: Recipient;
