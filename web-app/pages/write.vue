@@ -6,7 +6,11 @@
       <section class="emailr-content-item">
         <div class="Write__recipientHeader">
           <h2 class="emailr-subtitle">Recipient</h2>
-          <b-button variant="outline-dark" size="sm" class="Write__recipientVerify">
+          <b-button
+            variant="outline-dark"
+            size="sm"
+            class="Write__recipientVerify"
+          >
             Verify
           </b-button>
         </div>
@@ -44,10 +48,7 @@
         />
       </section>
 
-      <b-button
-        :disabled="isSendButtonDisabled"
-        @click="onSendButtonClick"
-      >
+      <b-button :disabled="isSendButtonDisabled" @click="onSendButtonClick">
         Send Mail
       </b-button>
     </b-container>
@@ -56,7 +57,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import firebase from 'firebase'
+import firebase from 'firebase';
 
 export default Vue.extend({
   data: () => ({
@@ -72,7 +73,7 @@ export default Vue.extend({
       postcode: '',
       country: '',
     },
-    letterContent: ''
+    letterContent: '',
   }),
   computed: {
     recipientFields(): Array<string> {
@@ -82,13 +83,13 @@ export default Vue.extend({
       return `Dear ${this.recipient.firstname},`;
     },
     isSendButtonDisabled() {
-      this.recipientFields.forEach(field => {
+      this.recipientFields.forEach((field) => {
         // @ts-ignore (due to type error on reading "recipient[field]")
         if (!this.recipient[field]) return true;
       });
       if (!this.letterContent) return true;
       return false;
-    }
+    },
   },
   methods: {
     onVerifyClick() {
@@ -101,29 +102,28 @@ export default Vue.extend({
       // perhaps make a record of the mail in our database at this point
       try {
         // prod & firebase docs method of calling
-        firebase.functions().useEmulator('localhost', 5001)
-        const sendNewDocument = firebase.functions().httpsCallable('default-sendNewDocument')
-        const res = await sendNewDocument(
-          {
-            textContent: this.letterContent,
-            recipient: this.recipient
-          }
-        )
+        firebase.functions().useEmulator('localhost', 5001);
+          const sendNewDocument = firebase
+          .functions()
+          .httpsCallable('default-sendNewDocument');
+        const res = await sendNewDocument({
+          textContent: this.letterContent,
+          recipient: this.recipient,
+        });
         console.log('res: ', res);
-        window.location.href = res.data.url
+        window.location.href = res.data.url;
       } catch (err) {
-        console.error(err) // eslint-disable-line no-console
+        console.error(err); // eslint-disable-line no-console
       }
-    }
+    },
   },
 });
 </script>
 
 <style lang="scss">
-@import '../styles/classes';
+@import "../styles/classes";
 
 .Write {
-
   &__recipientHeader {
     display: flex;
     flex-direction: row;
@@ -138,6 +138,5 @@ export default Vue.extend({
   &__recipientLabel {
     text-transform: capitalize;
   }
-
 }
 </style>
