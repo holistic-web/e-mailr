@@ -65,7 +65,7 @@ export default Vue.extend({
     this.isLoading = true;
     await this.fetchDocument({ id: this.$route.params.id });
     if (this.document.status === DocumentStatus.DRAFT && this.document.stripeSessionId) {
-      await this.verifyPaymentAndSend(this.document);
+      await this.verifyPaymentAndSend(this.document._id);
       await this.fetchDocument({ id: this.$route.params.id });
     }
     this.isLoading = false;
