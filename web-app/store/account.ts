@@ -33,16 +33,18 @@ export const actions: ActionTree<RootState, RootState> = {
       try {
         await dispatch('fetchUser', { id: authUser.uid });
       } catch (err) {
-        // Handle the race condition where user's profile is in the process of being preovisioned
+        // Handle the race condition where user's profile is in the process of being provisioned
         if (!isRetry)
           setTimeout(
             () => dispatch('onAuthStateChanged', { authUser, isRetry: true }),
             1500
           );
+        throw err;
       }
       this.$router.push('/');
     } else {
       commit('SET_USER', undefined);
+      commit('SET_ID_TOKEN', undefined);
     }
   },
 
