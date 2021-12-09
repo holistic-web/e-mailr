@@ -45,11 +45,12 @@ export const actions: ActionTree<RootState, RootState> = {
     const documents: Document[] = [];
     commit('SET_DOCUMENTS', documents);
     return documents;
-  }
+  },
 
-  // async addDocument( document: Document ) {
-    // adds a document
-  // }
+  sendNewDocument(_vuex , document: Document): Promise<any> {
+    const sendNewDocument = this.$fire.functions.httpsCallable('default-sendNewDocument');
+    return sendNewDocument(document);
+  }
 
 };
 
