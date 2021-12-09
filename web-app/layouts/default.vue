@@ -26,6 +26,6 @@ html, body, #__nuxt, #__layout, .DefaultLayout {
 .DefaultLayout {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
 }
 </style>

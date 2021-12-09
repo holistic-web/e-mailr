@@ -122,6 +122,7 @@ export default Vue.extend({
         console.log('res: ', res);
         window.location.href = res.data.url;
       } catch (err) {
+        alert(`Error sending mail: ${err}`); // TODO: replace alerts with something better
         console.error(err); // eslint-disable-line no-console
       }
     },

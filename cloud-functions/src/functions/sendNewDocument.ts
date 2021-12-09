@@ -1,67 +1,54 @@
-import * as functions from "firebase-functions";
-import { Document, DocumentStatus } from "../../../firestore/types";
-// import config from "../config";
-const admin = require("firebase-admin");
-const config = require('../config');
-const stripe = require("stripe")(config.stripe_secret_key);
+import * as functions from 'firebase-functions';
+import { Document, DocumentStatus } from '../../../firestore/types';
+import config from '../config';
+const admin = require('firebase-admin');
+const stripe = require('stripe')(config.stripe.secretKey);
 
 const sendNewDocument = async (data: any, context: any) => {
-  try {
-    console.log('context: ', context);
-    console.log('data: ', data);
-    if (!context.auth)
-      throw new Error("you must be authenticated to call this function");
+  if (!context.auth)
+    throw new Error('you must be authenticated to call this function');
 
-    // TODO: verify the recipient with the Stannp API
+  // TODO: verify the recipient with the Stannp API
 
-    const document: Document = {
-      userId: context.auth.uid,
-      textContent: data.textContent,
-      recipient: data.recipient,
-      status: DocumentStatus.DRAFT,
-    };
-    const documentsCollection = admin.firestore().collection("documents");
-    const documentRef = await documentsCollection.add(document);
-    const id = documentRef.id;
+  const document: Document = {
+    userId: context.auth.uid,
+    textContent: data.textContent,
+    recipient: data.recipient,
+    status: DocumentStatus.DRAFT,
+  };
+  const documentsCollection = admin.firestore().collection('documents');
+  const documentRef = await documentsCollection.add(document);
+  const id = documentRef.id;
 
-    // Create a stripe session and redirect the user to the payments page
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      customer_email: context.auth.token.email,
-      mode: "payment",
-      line_items: [
-        {
-          price_data: {
-            product_data: {
-              name: "Mail",
-              metadata: {
-                documnameentId: id
-              }
-            },
-            currency: "gbp",
-            unit_amount: 200,
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    customer_email: context.auth.token.email,
+    mode: 'payment',
+    line_items: [
+      {
+        price_data: {
+          product_data: {
+            name: 'Mail',
+            metadata: {
+              documentId: id
+            }
           },
-          quantity: 1,
+          currency: 'gbp',
+          unit_amount: 200,
         },
-      ],
+        quantity: 1,
+      },
+    ],
 
-      // TODO: implement a page that handles the stripe redirect on completion
-      // TODO: how do we verify we were actually sent to this page by stripe?
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
-      // TODO: tidy up the success / cancel pages that already exist if we don't use them
-    });
-    console.log('session: ', session);
-    // Attach the stripe session id to the document in our database
-    await documentsCollection.doc(id).update({
-      stripeSessionId: session.id,
-    });
+    success_url: `${config.stripe.redirectBaseUrl}/mail/${id}`,
+    cancel_url: `${config.stripe.redirectBaseUrl}/write`
+  });
 
-    return { url: session.url };
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  await documentsCollection.doc(id).update({
+    stripeSessionId: session.id,
+  });
+
+  return { url: session.url };
 };
 
 export default functions.https.onCall(sendNewDocument);

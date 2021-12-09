@@ -32,6 +32,7 @@ localhost:5001/e-mailr/us-central1
 ### Environment Variables
 You will need the following environment variables configured:
 
-| **Variable**      | **Description**                                |
-|-------------------|------------------------------------------------|
-| STRIPE_SECRET_KEY | The stripe secret key (use a dev one locally!) |
+| **Variable**             | **Description**                                |
+|--------------------------|------------------------------------------------|
+| STRIPE_SECRET_KEY        | The stripe secret key (use a dev one locally!) |
+| STRIPE_REDIRECT_BASE_URL | Url for stripe to redirect back to             |

@@ -36,7 +36,7 @@ export const actions: ActionTree<RootState, RootState> = {
     }
   },
 
-  async fetchDocuments({ commit }, queryParams: string[] = []): Promise<Documents> {
+  async fetchDocuments({ commit }, queryParams: string[] = []): Promise<Document[]> {
     // @ts-ignore
     const documentsRef = this.$fire.firestore.collection('documents').where(...queryParams);
     const documentsSnapshot = await documentsRef.get();
