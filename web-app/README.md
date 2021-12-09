@@ -25,7 +25,7 @@ For detailed explanation on how things work, check out the [documentation](https
 When testing use the following payment information for a succesful payment:
  - Card number: 4242424242424242
  - Any valid future exp dates
- - Any three digit CVC
+ - Any three digit CVV
 
 ## Special Directories
 
