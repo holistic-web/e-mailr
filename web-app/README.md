@@ -1,6 +1,16 @@
 # Web App
 This is a Nuxt web app, deployed as a static site. Below is the standard Nuxt.js Readme file.
 
+## Running with Local Firestore Functions.
+
+1. Ensure the cloud functions emulator is running as per the cloud functions README.
+
+2. Set the following environment variables before running this Nuxt project locally:
+  ```
+  NUXT_ENV_FIREBASE_EMULATOR_PORT=5001
+  ```
+
+
 ## Build Setup
 
 ```bash

@@ -71,6 +71,7 @@ export default {
         },
       },
       firestore: true,
+      functions: true
     },
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios

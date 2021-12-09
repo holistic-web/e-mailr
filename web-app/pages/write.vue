@@ -4,9 +4,14 @@
       <h1 class="emailr__title">Write Your Letter</h1>
 
       <section class="emailr-content-item">
-        <div class="Write__recipientHeader">
+        <div class="write__recipientHeader">
           <h2 class="emailr-subtitle">Recipient</h2>
-          <b-button variant="outline-dark" size="sm" class="Write__recipientVerify">
+          <b-button
+            variant="outline-dark"
+            size="sm"
+            class="write__recipientVerify"
+            @click="onVerifyRecipientClick"
+          >
             Verify
           </b-button>
         </div>
@@ -18,14 +23,14 @@
         >
           <b-col sm="3">
             <label
-              class="Write__recipientLabel"
-              :for="`Write__recipientField-${field}`"
+              class="write__recipientLabel"
+              :for="`write__recipientField-${field}`"
               v-text="field"
             />
           </b-col>
           <b-col sm="9">
             <b-form-input
-              :id="`Write__recipientField-${field}`"
+              :id="`write__recipientField-${field}`"
               v-model="recipient[field]"
               size="sm"
               :required="true"
@@ -44,10 +49,7 @@
         />
       </section>
 
-      <b-button
-        :disabled="isSendButtonDisabled"
-        @click="onSendButtonClick"
-      >
+      <b-button :disabled="isSendButtonDisabled" @click="onSendButtonClick">
         Send Mail
       </b-button>
     </b-container>
@@ -56,22 +58,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapActions } from 'vuex';
+import lobRecipient from '../lib/lobRecipient';
 
 export default Vue.extend({
   data: () => ({
-    // Recipient schema as per https://www.stannp.com/uk/direct-mail-api/letters
-    recipient: {
-      title: '',
-      company: '',
-      firstname: '',
-      lastname: '',
-      address1: '',
-      address2: '',
-      town: '',
-      postcode: '',
-      country: '',
-    },
-    letterContent: ''
+    recipient: lobRecipient,
+    letterContent: '',
   }),
   computed: {
     recipientFields(): Array<string> {
@@ -81,33 +74,45 @@ export default Vue.extend({
       return `Dear ${this.recipient.firstname},`;
     },
     isSendButtonDisabled() {
-      this.recipientFields.forEach(field => {
+      let isDisabled = false;
+      this.recipientFields.forEach((field) => {
         // @ts-ignore (due to type error on reading "recipient[field]")
-        if (!this.recipient[field]) return true;
+        if (!this.recipient[field]) isDisabled = true;
       });
-      if (!this.letterContent) return true;
-      return false;
-    }
+      if (!this.letterContent) isDisabled = true;
+      return isDisabled
+    },
   },
   methods: {
-    onVerifyClick() {
+    ...mapActions({
+      sendNewDocument: 'document/sendNewDocument'
+    }),
+    onVerifyRecipientClick() {
       // TODO: implement this
       // check the address is valid against Stannp
       // perhaps can do this (debounced) on input change and remove this button
     },
-    onSendButtonClick() {
-      // TODO: implement this
-      // take the user to the payment flow
-      // perhaps make a record of the mail in our database at this point
-    }
+    async onSendButtonClick() {
+      try {
+         const res = await this.sendNewDocument({
+          textContent: this.letterContent,
+          recipient: this.recipient,
+        });
+        window.location.href = res.data.url;
+      } catch (err) {
+        alert(`Error sending mail: ${err}`); // TODO: replace alerts with something better
+        throw err;
+      }
+    },
+
   },
 });
 </script>
 
 <style lang="scss">
-@import '../styles/classes';
+@import "../styles/classes";
 
-.Write {
+.write {
 
   &__recipientHeader {
     display: flex;

@@ -4,7 +4,7 @@
       size="lg"
       :disabled="isSubmitting"
       @click="onLoginClick"
-      v-text="'Login or Sign Up'"
+      v-text="'Log In or Sign Up'"
     />
   </section>
 </template>
