@@ -1,7 +1,7 @@
 <template>
   <section class="emailr-page">
     <b-container class="emailr-content">
-      <h1 class="emailr__title">Successful Payment</h1>
+      <h1 class="emailr__title">Letter Sent</h1>
 
       <b-button
         @click="onSendButtonClick"

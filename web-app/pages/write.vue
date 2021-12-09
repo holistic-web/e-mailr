@@ -59,22 +59,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import firebase from 'firebase';
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
+import stannpRecipient from '../lib/stannpRecipient';
 
 export default Vue.extend({
   data: () => ({
-    // Recipient schema as per https://www.stannp.com/uk/direct-mail-api/letters
-    recipient: {
-      title: '',
-      company: '',
-      firstname: '',
-      lastname: '',
-      address1: '',
-      address2: '',
-      town: '',
-      postcode: '',
-      country: '',
-    },
+    recipient: stannpRecipient,
     letterContent: '',
   }),
   computed: {
@@ -95,40 +85,27 @@ export default Vue.extend({
     },
   },
   methods: {
+    ...mapActions({
+      sendNewDocument: 'document/sendNewDocument'
+    }),
     onVerifyRecipientClick() {
       // TODO: implement this
       // check the address is valid against Stannp
       // perhaps can do this (debounced) on input change and remove this button
     },
     async onSendButtonClick() {
-      // take the user to the payment flow
-      // perhaps make a record of the mail in our database at this point
       try {
-        // prod & firebase docs method of calling
-        firebase.functions().useEmulator('localhost', 5001);
-          const sendNewDocument = firebase
-          .functions()
-          .httpsCallable('default-sendNewDocument');
-        const res = await sendNewDocument({
+         const res = await this.sendNewDocument({
           textContent: this.letterContent,
           recipient: this.recipient,
         });
-        const documentData = {
-          textContent: this.letterContent,
-          recipient: this.recipient,
-          stripeSessionId: res.data.id
-        }
-        await this.setDocument(documentData)
-        console.log('res: ', res);
         window.location.href = res.data.url;
       } catch (err) {
         alert(`Error sending mail: ${err}`); // TODO: replace alerts with something better
-        console.error(err); // eslint-disable-line no-console
+        throw err;
       }
     },
-    ...mapActions({
-      setDocument: 'document/addDocument'
-    })
+
   },
 });
 </script>

@@ -7,9 +7,7 @@ This is a Nuxt web app, deployed as a static site. Below is the standard Nuxt.js
 
 2. Set the following environment variables before running this Nuxt project locally:
   ```
-  FIREBASE_EMULATOR_LOCATION=us-central1
-  FIREBASE_EMULATOR_PORT=5001
-  FIREBASE_EMULATOR_HOST=localhost:5001
+  NUXT_ENV_FIREBASE_EMULATOR_PORT=5001
   ```
 
 
