@@ -13,26 +13,22 @@ const verifyPaymentAndSend = async (data: any, context: any) => {
     await admin.firestore().runTransaction(async (t: any) => {
       const doc = await t.get(documentRef)
       const documentData = doc.data()
-      if (documentData.userId === context.auth.uid) {
-        if (documentData.status === DocumentStatus.DRAFT) {
-          const session = await stripe.checkout.sessions.retrieve(documentData.stripeSessionId)
-          const paymentIntentId = session.payment_intent
-          const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
-          if (paymentIntent.status === 'succeeded') {
-            //  TODO: send the mail w/stannp
-            await t.update(documentRef, { status: DocumentStatus.SENT });
-          } else {
-            throw new Error('Payment must succeed to send a letter');
-          }
-        } else {
-          throw new Error('Function is not in draft');
-        }
-      }
+
+      if (documentData.userId !== context.auth.uid) throw new Error('you are not authorized to perform this action')
+      if (documentData.status !== DocumentStatus.DRAFT) throw new Error('you can only send a draft document')
+
+      const session = await stripe.checkout.sessions.retrieve(documentData.stripeSessionId)
+      const paymentIntentId = session.payment_intent
+      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
+
+      if (paymentIntent.status !== 'succeeded') throw new Error('payment was not successful')
+      //  TODO: send the mail with stannp
+      await t.update(documentRef, { status: DocumentStatus.SENT });
     });
   } catch (e) {
     console.log('Transaction failure:', e);
   }
-    
+
   // const documentsCollectionSnapshot = await admin.firestore().collection('documents').where('userId','==', context.auth.uid).get();
   // for (const document of documentsCollectionSnapshot.docs) {
   //   const documentData = document.data()
