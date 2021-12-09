@@ -11,6 +11,8 @@ const sendNewDocument = async (data: any, context: any) => {
   if (!context.auth)
     throw new Error("you must be authenticated to call this function");
 
+  // TODO: verify the recipient with the Stannp API
+
   const document: Document = {
     userId: context.auth.uid,
     textContent: data.textContent,
@@ -41,6 +43,7 @@ const sendNewDocument = async (data: any, context: any) => {
         quantity: 1,
       },
     ],
+
     // TODO: implement a page that handles the stripe redirect on completion
     // TODO: how do we verify we were actually sent to this page by stripe?
     success_url: "http://localhost:3000/success",
@@ -53,7 +56,7 @@ const sendNewDocument = async (data: any, context: any) => {
     stripeSessionId: session.id,
   });
 
-  return {url: session.url};
+  return { url: session.url };
 };
 
 export default functions.https.onCall(sendNewDocument);

@@ -17,3 +17,15 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style lang="scss">
+html, body, #__nuxt, #__layout, .DefaultLayout {
+  height: 100%;
+}
+
+.DefaultLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+</style>

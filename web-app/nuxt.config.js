@@ -71,6 +71,11 @@ export default {
         },
       },
       firestore: true,
+      functions: {
+        location: process.env.FIREBASE_EMULATOR_LOCATION ? process.env.FIREBASE_EMULATOR_LOCATION : undefined,
+        emulatorPort: process.env.FIREBASE_EMULATOR_PORT ? process.env.FIREBASE_EMULATOR_PORT : undefined,
+        emulatorHost: process.env.FIREBASE_EMULATOR_HOST ? process.env.FIREBASE_EMULATOR_HOST : undefined,
+      }
     },
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
