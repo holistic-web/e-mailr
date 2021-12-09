@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import config from '../config';
+import { DocumentStatus } from '../../../firestore/types';
 const admin = require('firebase-admin');
 const stripe = require('stripe')(config.stripe.secretKey);
 
@@ -10,25 +11,25 @@ const verifyPaymentAndSend = async (data: any, context: any) => {
     throw new Error('you must be authenticated to call this function');
 
   try {
-    const documentRef = await admin.firestore().collection('documents').where('stripeSessionId','==', data.sessionId);
+    const documentRef = await admin.firestore().collection('documents').where('id','==', data.documentId);
     const res = await admin.firestore().runTransaction(async (t: any) => {
       const doc = await t.get(documentRef)
       const documentData = doc.data()
       if (documentData.userId === context.auth.uid) {
-        if (!documentData.inFlight) {
-          await t.update(documentRef, { inFlight: true });
-          const session = await stripe.checkout.sessions.retrieve(data.stripeSessionId)
+        if (documentData.status === DocumentStatus.DRAFT) {
+          const session = await stripe.checkout.sessions.retrieve(documentData.stripeSessionId)
           const paymentIntentId = session.payment_intent
           const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
           if (paymentIntent.status === 'succeeded') {
             //  send the mail
             console.log('send letter now');
+            await t.update(documentRef, { status: DocumentStatus.SENT });
           } else {
             console.log('your payment must succeed to send a letter');
             // throw new Error('your payment must succeed to send a letter');
           }
         } else {
-          throw new Error('Function already in flight');
+          throw new Error('Function is not in draft');
         }
       }
     });
