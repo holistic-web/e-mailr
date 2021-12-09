@@ -58,7 +58,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import firebase from 'firebase';
 import { mapActions } from 'vuex';
 import stannpRecipient from '../lib/stannpRecipient';
 
