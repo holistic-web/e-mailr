@@ -59,11 +59,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapActions } from 'vuex';
-import stannpRecipient from '../lib/stannpRecipient';
+import lobRecipient from '../lib/lobRecipient';
 
 export default Vue.extend({
   data: () => ({
-    recipient: stannpRecipient,
+    recipient: lobRecipient,
     letterContent: '',
   }),
   computed: {

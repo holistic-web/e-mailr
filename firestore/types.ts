@@ -4,15 +4,14 @@ export interface User {
 }
 
 export interface Recipient {
-  title: string;
-  company: string;
   firstname: string;
   lastname: string;
   address1: string;
   address2: string;
-  town: string;
-  postcode: string;
   country: string;
+  city: string;
+  state: string;
+  zip: string;
 }
 
 export enum DocumentStatus {
