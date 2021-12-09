@@ -47,6 +47,10 @@ export const actions: ActionTree<RootState, RootState> = {
     return documents;
   }
 
+  // async addDocument( document: Document ) {
+    // adds a document
+  // }
+
 };
 
 export const mutations: MutationTree<RootState> = {

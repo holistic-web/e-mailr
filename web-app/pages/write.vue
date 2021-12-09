@@ -58,6 +58,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import firebase from 'firebase';
+import { mapActions } from 'vuex'
 
 export default Vue.extend({
   data: () => ({
@@ -110,12 +111,21 @@ export default Vue.extend({
           textContent: this.letterContent,
           recipient: this.recipient,
         });
+        const documentData = {
+          textContent: this.letterContent,
+          recipient: this.recipient,
+          stripeSessionId: res.data.id
+        }
+        await this.setDocument(documentData)
         console.log('res: ', res);
         window.location.href = res.data.url;
       } catch (err) {
         console.error(err); // eslint-disable-line no-console
       }
     },
+    ...mapActions({
+      setDocument: 'document/addDocument'
+    })
   },
 });
 </script>
