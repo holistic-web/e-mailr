@@ -45,13 +45,13 @@
 import Vue from 'vue';
 import { mapGetters, mapActions } from 'vuex';
 import { DocumentStatus } from '../../../firestore/types';
-import stannpRecipient from '../../lib/stannpRecipient';
+import lobRecipient from '../../lib/lobRecipient';
 
 
 export default Vue.extend({
   data: () => ({
     isLoading: false,
-    recipient: stannpRecipient,
+    recipient: lobRecipient,
   }),
   computed: {
     ...mapGetters({
